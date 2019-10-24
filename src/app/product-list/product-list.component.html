@@ -1,0 +1,24 @@
+<h2>Products</h2>
+<div class="p-3">
+  <a routerLink="/form" class="btn btn-primary ">Agregar</a>
+  <button (click)="removeAll($event)" class="btn btn-danger mx-2" > Eliminar Todos</button>
+</div>
+
+<div *ngFor="let product of products; let i = index">
+   <div class="card m-3" >
+    <div class="card-body">
+      <h5 class="card-title">{{product.name}}</h5>
+      <p *ngIf= "product.description">
+        {{product.description}}
+      </p>
+      <a routerLink="/form" class="btn btn-primary " (click)="put(index, product)">Editar</a>
+      <button class="btn btn-danger mx-2" (click)="remove(i)"> Eliminar</button>
+    </div>
+  </div>
+</div>
+
+<!-- 
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://angular.io/license
+-->
