@@ -1,5 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import{ ProductsService} from '../products.service';
+import { Router } from "@angular/router";
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
@@ -7,7 +8,7 @@ import{ ProductsService} from '../products.service';
 })
 export class ProductListComponent implements OnInit{
   products: Array<any>;
-  constructor(private productsService: ProductsService){}
+  constructor(private productsService: ProductsService, private router: Router){}
 
   ngOnInit(){
     this.products = this.productsService.getProducts();
@@ -20,7 +21,9 @@ export class ProductListComponent implements OnInit{
     this.productsService.removeAll()
     window.alert('Se borraron todos');
   }
-
+  put(index, product){
+    this.router.navigate(['/edit', index])
+  }
   share() {
     window.alert('The product has been shared!');
   }

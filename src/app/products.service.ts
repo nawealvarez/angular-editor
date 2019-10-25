@@ -28,6 +28,9 @@ export class ProductsService {
     this.products.push(product)
     return true;
   }
+  getProduct(index){
+    return this.products[index]
+  }
   remove(index){
     this.products.splice(index, 1);
   }

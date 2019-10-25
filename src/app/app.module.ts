@@ -15,7 +15,8 @@ import { ProductFormComponent } from './product-form/product-form.component';
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: 'list', component: ProductListComponent },
-      {path:'form', component: ProductFormComponent}
+      {path:'form', component: ProductFormComponent},
+      {path: 'edit/:index', component:ProductFormComponent}
     ])
   ],
   declarations: [

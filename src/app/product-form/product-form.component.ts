@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ProductsService} from '../products.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 
 
 @Component({
@@ -11,13 +11,18 @@ import { Router } from "@angular/router";
 })
 export class ProductFormComponent implements OnInit {
   public form: FormGroup;
-  constructor(private producsService: ProductsService, private router: Router) { 
+  constructor(private producsService: ProductsService, private router: Router,
+  private route: ActivatedRoute) { 
   this.form = new FormGroup(
     {name: new FormControl(''),
     price: new FormControl(''),
     description: new FormControl('')}
   )}
   ngOnInit() {
+    this.route.paramMap.subscribe(parameterMap =>{
+      const index = +parameterMap.get('index');
+      this.producsService.getProduct(index);
+    });
   }
   onFormSubmitted(){
     const result = this.producsService.addProduct(this.form.value);
@@ -25,15 +30,4 @@ export class ProductFormComponent implements OnInit {
       this.router.navigate(['/list']);
     }
   }
-  put(index, product) {
-  this.form.setValue({
-    name: product.name,
-    price: product.price,
-    description: product.description
-  })
-  const result = this.producsService.put(index, this.form.value);
-  if (result){
-      this.router.navigate(['/list']);
-    }
-}
 }
